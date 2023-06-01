@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <link th:fragment="link-css" rel="stylesheet" th:href="@{/css/bootstrap.min.css}">-->
+  <title>Add Nhanvien</title>
+</head>
+<body>
+<div th:replace="layout :: header"></div>
+<div class="container">
+  <h1>Add Nhanvien</h1>
+  <form th:action="@{/nhanvien/add}" th:object="${nhanvien}" method="post" enctype="multipart/form-data">
+    <div class="col-6 mb-3">
+      <label class="form-label" for="tenNv">TênNv:</label>
+      <input class="form-control" type="text" th:field="*{tenNv}" id="tenNv">
+      <span class="text-danger" th:errors="*{tenNv}"></span>
+    </div>
+
+    <div class="col-6 mb-3">
+      <label class="form-label" for="phai">Phái:</label>
+      <input class="form-control" type="text" th:field="*{phai}" id="phai">
+    </div>
+    <div class="col-6 mb-3">
+      <label class="form-label" for="noisinh">Nơi Sinh:</label>
+      <input class="form-control" type="text" th:field="*{noisinh}" id="noisinh">
+    </div>
+    <div class="col-6 mb-3">
+      <label class="form-label" for="maPhong">Mã Phòng:</label>
+      <input class="form-control" type="text" th:field="*{maPhong}" id="maPhong">
+    </div>
+
+    <div class="col-6 mb-3">
+      <label class="form-label" for="luong">Lương:</label>
+      <input class="form-control" type="text" th:field="*{luong}" id="luong">
+      <span class="text-danger" th:errors="*{luong}"></span>
+    </div>
+
+    <div class="col-6 mb-3">
+      <label class="form-label" for="imageProduct">Image:</label>
+      <input class="form-control" type="file" name="imageProduct" id="imageProduct" accept="image/png, image/jpeg">
+      <div class="alert alert-warning" th:if="${#fields.hasErrors('image')}" th:errors="*{image}"></div>
+    </div>
+
+    <div class="col-6 mb-3">
+      <label class="form-label" for="phongban">PhòngBan:</label>
+      <select class="form-control" id="phongban" th:field="*{phongban.id}">
+        <option value="">-- Select PhongBan --</option>
+        <option th:each="phongBan: ${categories}" th:value="${phongBan.id}" th:text="${phongBan.name}"></option>
+      </select>
+      <span class="text-danger" th:errors="*{phongban}"></span>
+    </div>
+    <input type="submit" class="btn btn-primary" value="Save">
+  </form>
+  <a th:href="@{/nhanvien}">Back to List</a>
+</div>
+<div th:replace="layout :: footer"></div>
+</body>
+</html>
+
+
